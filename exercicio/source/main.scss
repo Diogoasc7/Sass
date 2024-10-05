@@ -1,0 +1,111 @@
+@use "config/reset";
+@use "config/variaveis";
+
+@mixin elementoContainer(){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: pixelParaEm(16px) 0;
+}
+
+@function pixelParaEm($alvoEmPixel, $contextoEmPixel: 16px) {
+    @return ($alvoEmPixel / $contextoEmPixel) * 1em;
+}
+
+
+body {
+    background-color: variaveis.$corDeFundo;
+}
+
+li {
+    list-style: none;
+}
+
+.container {
+    max-width: pixelParaEm(1024px);
+    width: 100%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: variaveis.$fundoHeader;
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    .container {
+        @include elementoContainer();
+    }
+
+    .menu {
+        display: flex;
+
+        li {
+            font-weight: bold;
+            margin-left: pixelParaEm(24px);
+
+            a {
+                color: variaveis.$corDaLetra;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+section {
+    padding: pixelParaEm(56px) 0;
+}
+
+.products {
+    margin-top: pixelParaEm(40px);
+    display: grid;
+    grid-template-columns: repeat(3, 32.66%);
+    column-gap: 1%;
+    row-gap: 4%;
+    width: 100%;
+}
+
+.product-item img {
+    width: 100%;
+    border-radius: pixelParaEm(16px);
+}
+
+.product-button {
+    display: block;
+    background-color: variaveis.$corButton;
+    color: variaveis.$corDaLetra;
+    text-align: center;
+    padding: pixelParaEm(8px) 0;
+    border-radius: pixelParaEm(8px);
+    margin-top: pixelParaEm(8px);
+    text-decoration: none;
+
+    &:hover {
+        background-color: lighten(variaveis.$corButton, 5%);
+    }
+}
+
+@media screen and (max-width: variaveis.$tablet) {
+    .container {
+        max-width: 80%;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, 48.5%);
+        column-gap: 3%;
+    }
+}
+
+@media screen and (max-width: variaveis.$mobile){
+    .products {
+        display: block;
+    }
+    
+    .product-item  {
+        margin-bottom: 32px;
+    }
+}
+
+
+
+
